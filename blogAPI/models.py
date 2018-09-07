@@ -31,6 +31,7 @@ class Blog(models.Model):
 class Page(models.Model):
     author = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
+    header = models.CharField(max_length=255)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     modified_date = models.DateTimeField(auto_now=True)

@@ -10,7 +10,7 @@ class TestBlog(TestCase):
         self.client = APIClient()
         # Needed in set up for query calls
         self.blogData = {'author': 'Test Person', 'title': 'New Blog Post', 'text': 'Content for this post'}
-        self.pageData = self.blog_data = {'author': 'Test Person', 'title': 'New Page', 'text': 'This is a new page'}
+        self.pageData = self.blog_data = {'author': 'Test Person', 'title': 'New', 'header': 'What am I doing?', 'text': 'This is a new page'}
         self.blogResponse = self.client.post(
             reverse('posts'),
             self.blogData,
