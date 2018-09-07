@@ -19,5 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Include URL's for API to make sure app routes to API
-    path('', include('blogAPI.urls'))
+    path('api/', include('blogAPI.urls'))
 ]
