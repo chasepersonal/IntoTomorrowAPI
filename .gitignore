@@ -55,7 +55,9 @@ coverage.xml
 *.log
 local_settings.py
 db.sqlite3
-PersonalBlogAPI/PersonalBlogAPI/settings.py
+../PersonalBlogAPI/settings
+base.py
+prod.py
 
 # Flask stuff:
 instance/
