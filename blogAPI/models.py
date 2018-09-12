@@ -5,12 +5,17 @@ from django.db import models
 from django.utils import timezone
 from django import forms
 from django.template.defaultfilters import slugify
+import uuid
 
 # Variable definitions for Blog class
 
+class Author(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=255)
+
 class Blog(models.Model):
-    author = models.CharField(max_length=255)
-    title = models.CharField(max_length=255)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) 
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="name")
     text = models.TextField()
     slug = models.SlugField()
     created_date = models.DateTimeField(default=timezone.now)
@@ -29,7 +34,8 @@ class Blog(models.Model):
         return "{}".format(self.title)
 
 class Page(models.Model):
-    author = models.CharField(max_length=255)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) 
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="name")
     title = models.CharField(max_length=255)
     header = models.CharField(max_length=255)
     text = models.TextField()
@@ -39,3 +45,10 @@ class Page(models.Model):
     def __str__(self):
         # Return human readable version
         return "{}".format(self.title)
+
+class Photo(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) 
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    page = models.ForeignKey(Page, on_delete=models.CASCADE)
+    image = models.ImageField()
+

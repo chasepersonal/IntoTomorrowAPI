@@ -25,12 +25,16 @@ class BlogDetailsView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = BlogSerializer
     lookup_field = 'slug'
 
+# View for POST for Pages
+
 class PageCreateView(generics.ListCreateAPIView):
     queryset = Page.objects.all()
     serializer_class = PageSerializer
 
     def perform_post(self, serializer):
         serializer.save()
+
+# View for GET, PUT, and DELETE requests for Blog
 
 class PageDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Page.objects.all()
