@@ -1,13 +1,10 @@
-version: "3"
+version: '3.3'
+
 services:
-  django:
-    container_name: personalblogapi_django
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: personalblogapi
-    command: python3 manage.py runserver 0.0.0.0:8000
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/code
+      - .:/code/savepointapi
     ports:
       - "8000:8000"

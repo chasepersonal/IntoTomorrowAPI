@@ -1,11 +1,9 @@
-FROM python:3
+FROM python:3.7
 
 ENV PYTHONUNBUFFERED 1
 
-ADD . /code/savepointapi
+ADD . /code/personalblogapi
 
-WORKDIR /code/savepointapi
+WORKDIR /code/personalblogapi
 
 RUN pip install -r requirements.txt
-
-CMD [ "python", "./manage.py runserver 0.0.0.0:8000" ]

@@ -31,6 +31,13 @@ class PageCreateView(generics.ListCreateAPIView):
     def perform_post(self, serializer):
         serializer.save()
 
+class AlbumCreateView(generics.ListCreateAPIView):
+    queryset = Page.objects.all()
+    serializer_class = PageSerializer
+
+    def perform_post(self, serializer):
+        serializer.save()
+
 class BlogDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
@@ -46,3 +53,8 @@ class PageDetailsView(generics.RetrieveUpdateDestroyAPIView):
 class PhotoDetailsView(generics.ListCreateAPIView):
     queryset = Photo.objects.all()
     serializer_class = PhotoSerializer
+
+class PageDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Page.objects.all()
+    serializer_class = PageSerializer
+    lookup_field = 'slug'
