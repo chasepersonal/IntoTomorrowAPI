@@ -1,13 +1,8 @@
 from rest_framework import serializers
-from .models import Blog, Page
+from .models import Blog, Page, Photo
 
 # Create serializer to map models into JSON format
 # Will make data transmission easier
-class AuthorSerializer(serialzers.ModelSerializer):
-    class Meta:
-        model = Author
-        fields = ('id', 'name')
-
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
@@ -23,4 +18,5 @@ class PageSerializer(serializers.ModelSerializer):
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
-        fields = ('id', 'blogId', 'pageId', 'image' )
+        fields = ('id', 'page_id', 'image' )
+        page = PageSerializer(many=True)

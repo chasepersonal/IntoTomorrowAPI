@@ -1,12 +1,11 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .models import Blog, Page
-from .serializers import BlogSerializer,PageSerializer
+from .models import Blog, Page, Photo
+from .serializers import BlogSerializer, PageSerializer, PhotoSerializer
 
 # View to allow API calls for Blog
 
-# View for POST for Blog
-
+# View for POST for Blog, Page, Photo, and Author Models
 class BlogCreateView(generics.ListCreateAPIView):
     # Defines create behavior for API
     queryset = Blog.objects.all()
@@ -18,14 +17,12 @@ class BlogCreateView(generics.ListCreateAPIView):
     # Save post data when new blog post is created
         serializer.save()
 
-# View for GET, PUT, and DELETE requests for Blog
+class PhotoCreateView(generics.ListCreateAPIView):
+    queryset = Photo.objects.all()
+    serializer_class = PhotoSerializer
 
-class BlogDetailsView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Blog.objects.all()
-    serializer_class = BlogSerializer
-    lookup_field = 'slug'
-
-# View for POST for Pages
+    def perform_post(self, serializer):
+        serializer.save()
 
 class PageCreateView(generics.ListCreateAPIView):
     queryset = Page.objects.all()
@@ -34,9 +31,18 @@ class PageCreateView(generics.ListCreateAPIView):
     def perform_post(self, serializer):
         serializer.save()
 
+class BlogDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogSerializer
+    lookup_field = 'slug'
+
 # View for GET, PUT, and DELETE requests for Blog
 
 class PageDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Page.objects.all()
     serializer_class = PageSerializer
     lookup_field = 'title'
+
+class PhotoDetailsView(generics.ListCreateAPIView):
+    queryset = Photo.objects.all()
+    serializer_class = PhotoSerializer
