@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .models import Blog, Page, Photo
-from .serializers import BlogSerializer, PageSerializer, PhotoSerializer
+from .models import Blog, Page, Photo, Album
+from .serializers import BlogSerializer, PageSerializer, PhotoSerializer, AlbumSerializer
 
 # View to allow API calls for Blog
 
@@ -32,29 +32,29 @@ class PageCreateView(generics.ListCreateAPIView):
         serializer.save()
 
 class AlbumCreateView(generics.ListCreateAPIView):
-    queryset = Page.objects.all()
-    serializer_class = PageSerializer
+    queryset = Album.objects.all()
+    serializer_class = AlbumSerializer
 
     def perform_post(self, serializer):
         serializer.save()
+
+# View for GET, PUT, and DELETE requests for Blog
 
 class BlogDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
     lookup_field = 'slug'
 
-# View for GET, PUT, and DELETE requests for Blog
-
 class PageDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Page.objects.all()
     serializer_class = PageSerializer
     lookup_field = 'title'
 
-class PhotoDetailsView(generics.ListCreateAPIView):
+class PhotoDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Photo.objects.all()
     serializer_class = PhotoSerializer
 
-class PageDetailsView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Page.objects.all()
-    serializer_class = PageSerializer
+class AlbumDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = AlbumSerializer
+    queryset = Album.objects.all()
     lookup_field = 'slug'

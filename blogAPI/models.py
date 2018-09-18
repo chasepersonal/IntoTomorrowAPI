@@ -39,7 +39,7 @@ class Page(models.Model):
         # Return human readable version
         return "{}".format(self.title)
 
-# Variable definitions for Blog class
+# Variable definitions for Album class
 class Album(models.Model):
     author = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
@@ -54,13 +54,15 @@ class Album(models.Model):
         if not self.id:
             self.slug = slugify(self.title)
         # Calls super class to instatiate the new save
-        super(Albums, self).save(*args, **kwargs)
+        super(Album, self).save(*args, **kwargs)
 
     def __str__(self):
         # Return human readable version
         return "{}".format(self.title)
 
+# Variable definitions for the Photo class
 class Photo(models.Model):
-    albums = models.ForeignKey(Album, on_delete=models.CASCADE)
+    album = models.ForeignKey(Album, related_name='photo', on_delete=models.CASCADE)
+    created_date = models.DateTimeField(default=timezone.now)
     image = models.ImageField()
 

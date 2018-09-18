@@ -1,5 +1,5 @@
-from rest_framework import serializers
-from .models import Blog, Page, Photo, Album
+from rest_framework import serializers, fields
+from .models import *
 
 # Create serializer to map models into JSON format
 # Will make data transmission easier
@@ -15,13 +15,23 @@ class PageSerializer(serializers.ModelSerializer):
         fields = ('id', 'author', 'title', 'header', 'text', 'created_date', 'modified_date')
         read_only_fields = ('header', 'created_date', 'modified_date')
 
-class AlbumSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = ('id', 'author', 'title', 'text', 'slug', 'created_date', 'modified_date')
-        read_only_fields = ('slug', 'created_date', 'modified_date')
-
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
-        fields = ('id', 'album_id', 'image' )
-        page = PageSerializer(many=True)
+        fields = ('id', 'album', 'image', 'created_date')
+
+class AlbumSerializer(serializers.ModelSerializer):
+
+    photo = PhotoSerializer(read_only=True,many=True)
+
+    class Meta:
+        model = Album
+        fields = ('id', 'author', 'title', 'text', 'slug', 'created_date', 'modified_date', 'photo')
+
+    # Will write data to nested serializer
+    def create(self, validated_data):
+        photos_data = validated_data.pop('photo')
+        album = Album.objects.create(**validated_data)
+        for photo_data in photos_data:
+            Photo.objects.create(album=album, **photo_data)
+        return album

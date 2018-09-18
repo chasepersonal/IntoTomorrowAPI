@@ -2,18 +2,18 @@
 
 from django.urls import *
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import BlogCreateView, BlogDetailsView, PageCreateView, PageDetailsView, PhotoDetailsView, AlbumCreateView
+from .views import BlogCreateView, BlogDetailsView, PageCreateView, PageDetailsView, PhotoDetailsView, PhotoCreateView, AlbumCreateView, AlbumDetailsView
 
 # Set patters for specific urls
 urlpatterns = {
     path('posts', BlogCreateView.as_view(), name="posts"),
     path('posts/<slug>', BlogDetailsView.as_view(), name="blog-details"),
     path('pages', PageCreateView.as_view(), name="pages"),
-    path('album/<slug>', BlogDetailsView.as_view(), name="album-details"),
+    path('pages/<title>', PageDetailsView.as_view(), name="pages-details"),
     path('album', AlbumCreateView.as_view(), name="album"),
-    path('photo', PhotoDetailsView.as_view(), name="photo"),
+    path('album/<slug>', AlbumDetailsView.as_view(), name="album-details"),
+    path('photo', PhotoCreateView.as_view(), name="photo"),
     path('photo/<pk>', PhotoDetailsView.as_view(), name="photo-details"),
-    path('pages/<title>', PageDetailsView.as_view(), name="pages-details")
 }
 
 # Format url based on url patterns

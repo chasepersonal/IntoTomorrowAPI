@@ -1,8 +1,6 @@
-import os
 import django_heroku
 from PersonalBlogAPI.settings.base import *
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
 
 ALLOWED_HOSTS = ['https://into-tommorrow-spa.herokuapp.com/']
 
@@ -15,6 +13,6 @@ CORS_ORIGIN_WHITELIST = (
     'https://into-tommorrow-spa.herokuapp.com/'
 )
 
-# Activate django_herkou to allow connection to Heroku
+# Activate django_herkou to allow connection to Heroku and establish Postgres Database
 
 django_heroku.settings(locals())
