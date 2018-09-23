@@ -22,7 +22,7 @@ class PhotoSerializer(serializers.ModelSerializer):
 
 class AlbumSerializer(serializers.ModelSerializer):
 
-    photo = PhotoSerializer(read_only=True,many=True)
+    photo = PhotoSerializer(many=True)
 
     class Meta:
         model = Album
@@ -33,5 +33,5 @@ class AlbumSerializer(serializers.ModelSerializer):
         photos_data = validated_data.pop('photo')
         album = Album.objects.create(**validated_data)
         for photo_data in photos_data:
-            Photo.objects.create(album=album, **photo_data)
+            Photo.objects.create(**photo_data)
         return album

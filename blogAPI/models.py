@@ -11,7 +11,7 @@ class Blog(models.Model):
     author = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     text = models.TextField()
-    slug = models.SlugField()
+    slug = models.SlugField(blank=True)
     created_date = models.DateTimeField(default=timezone.now)
     modified_date = models.DateTimeField(auto_now=True)
     
@@ -44,7 +44,7 @@ class Album(models.Model):
     author = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     text = models.TextField()
-    slug = models.SlugField()
+    slug = models.SlugField(blank=True)
     created_date = models.DateTimeField(default=timezone.now)
     modified_date = models.DateTimeField(auto_now=True)
 
@@ -64,5 +64,5 @@ class Album(models.Model):
 class Photo(models.Model):
     album = models.ForeignKey(Album, related_name='photo', on_delete=models.CASCADE)
     created_date = models.DateTimeField(default=timezone.now)
-    image = models.ImageField()
+    image = models.ImageField(blank=True)
 
