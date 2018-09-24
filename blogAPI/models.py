@@ -11,15 +11,22 @@ class Blog(models.Model):
     author = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     text = models.TextField()
+    summary = models.CharField(max_length=255, blank=True)
     slug = models.SlugField(blank=True)
     created_date = models.DateTimeField(default=timezone.now)
     modified_date = models.DateTimeField(auto_now=True)
     
     # When saving, override save function to set slug
     def save(self, *args, **kwargs):
-        # Set slug once
+        # If id is not set, save slug and summaryu
         if not self.id:
+            # Use slugify method to transform title into slug
             self.slug = slugify(self.title)
+            # Split text between 1st and 20th words
+            # Then join together to create the summary
+            self.summary = " ".join(self.text.split()[0:20])
+            # Add ellipsis at end to indicate summary
+            self.summary += '...'
         # Calls super class to instatiate the new save
         super(Blog, self).save(*args, **kwargs)
 
@@ -35,6 +42,13 @@ class Page(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     modified_date = models.DateTimeField(auto_now=True)
     
+    def save(self, *args, **kwargs):
+        # If id does not exist, set title to lowercase when saving
+        if not self.id:
+            self.title = self.title.lower()
+        # Calls super class to instatiate the new save
+        super(Page, self).save(*args, **kwargs)
+
     def __str__(self):
         # Return human readable version
         return "{}".format(self.title)

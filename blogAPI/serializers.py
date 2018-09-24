@@ -6,8 +6,8 @@ from .models import *
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
-        fields = ('id', 'author', 'title', 'text', 'slug', 'created_date', 'modified_date')
-        read_only_fields = ('slug', 'created_date', 'modified_date')
+        fields = ('id', 'author', 'title', 'text', 'summary', 'slug', 'created_date', 'modified_date')
+        read_only_fields = ('summary', 'slug', 'created_date', 'modified_date')
 
 class PageSerializer(serializers.ModelSerializer):
     class Meta:
