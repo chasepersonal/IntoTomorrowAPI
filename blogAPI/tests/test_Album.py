@@ -25,7 +25,7 @@ class TestAlbum(TestCase):
         newAlbum.save()
         self.assertEqual(newAlbum.slug, 'new-jersey')
 
-    def test_api_can_retreive_an_album(self):
+    def test_api_can_retreive_an_album_using_slug(self):
         # Retrieve an album using it's slug
         albumPost = Album.objects.get()
         albumReturn = self.client.get(

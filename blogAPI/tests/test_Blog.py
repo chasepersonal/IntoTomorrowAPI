@@ -44,7 +44,7 @@ class TestBlog(TestCase):
         self.assertEqual(blogReturn.status_code, 200)
         self.assertContains(blogReturn, blogPost)
 
-    def test_api_can_retreive_a_blog_post(self):
+    def test_api_can_retreive_a_blog_post_using_slug(self):
         # retrieve a blog post using the slug
         blogPost = Blog.objects.get()
         blogReturn = self.client.get(

@@ -48,7 +48,7 @@ class BlogDetailsView(generics.RetrieveUpdateDestroyAPIView):
 class PageDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Page.objects.all()
     serializer_class = PageSerializer
-    lookup_field = 'title'
+    lookup_field = 'slug'
 
 class PhotoDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Photo.objects.all()

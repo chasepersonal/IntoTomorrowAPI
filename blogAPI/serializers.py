@@ -12,8 +12,8 @@ class BlogSerializer(serializers.ModelSerializer):
 class PageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Page
-        fields = ('id', 'author', 'title', 'header', 'text', 'created_date', 'modified_date')
-        read_only_fields = ('header', 'created_date', 'modified_date')
+        fields = ('id', 'author', 'title', 'slug', 'header', 'text', 'created_date', 'modified_date')
+        read_only_fields = ('slug', 'header', 'created_date', 'modified_date')
 
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:

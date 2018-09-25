@@ -38,6 +38,7 @@ class Page(models.Model):
     author = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     header = models.CharField(max_length=255)
+    slug = models.CharField(max_length=255, blank=True)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     modified_date = models.DateTimeField(auto_now=True)
@@ -45,7 +46,7 @@ class Page(models.Model):
     def save(self, *args, **kwargs):
         # If id does not exist, set title to lowercase when saving
         if not self.id:
-            self.title = self.title.lower()
+            self.slug = slugify(self.title)
         # Calls super class to instatiate the new save
         super(Page, self).save(*args, **kwargs)
 

@@ -16,6 +16,12 @@ class TestPage(TestCase):
         )
 
     # Test page funcitonality
+
+    def test_page_title_saves_with_slugify(self):
+        newTitle = Page(title='New Page')
+        newTitle.save()
+        self.assertEqual(newTitle.slug, 'new-page')
+
     def test_api_can_create_page(self):
         # Test that a page will be created
         self.assertEqual(self.pageResponse.status_code, 201)
@@ -31,12 +37,12 @@ class TestPage(TestCase):
         self.assertEqual(pageReturn.status_code, 200)
         self.assertContains(pageReturn, page)
 
-    def test_api_can_retreive_a_page(self):
+    def test_api_can_retreive_a_page_using_slug(self):
         # Retrieve a page using it's title
         page = Page.objects.get()
         pageReturn = self.client.get(
             reverse('page-details',
-            kwargs={'title': page.title}), format="json"
+            kwargs={'slug': page.slug}), format="json"
             )
         # Confirm HTTP response and that the response equals the SQL call
         self.assertEqual(pageReturn.status_code, 200)
