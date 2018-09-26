@@ -4,6 +4,7 @@ from PersonalBlogAPI.settings.base import *
 
 ALLOWED_HOSTS = ['https://into-tomorrow.herokuapp.com/']
 
+# Turn off debug for 
 DEBUG = False
 
 CORS_ALLOW_CREDENTIAL = True # Allow Cookies

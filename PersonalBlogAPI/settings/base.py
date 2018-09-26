@@ -32,8 +32,6 @@ INSTALLED_APPS = [
     'rest_framework', # Needed for REST API functions
     'blogAPI', # Main API app
     'corsheaders', # To allow usage of CORS
-    'django_wysiwyg',
-    'tinymce',
 ]
 
 MIDDLEWARE = [
