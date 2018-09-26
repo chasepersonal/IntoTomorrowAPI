@@ -58,7 +58,7 @@ class Page(models.Model):
 class Album(models.Model):
     author = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
-    text = models.TextField()
+    summary = models.CharField(max_length=255)
     slug = models.SlugField(blank=True)
     created_date = models.DateTimeField(default=timezone.now)
     modified_date = models.DateTimeField(auto_now=True)
