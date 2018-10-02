@@ -12,3 +12,9 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# Collect media files locally and save them in a media folder
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# URL for media collection
+MEDIA_URL = '/media/'

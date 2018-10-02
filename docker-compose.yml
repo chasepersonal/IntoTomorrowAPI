@@ -5,18 +5,16 @@ services:
     image: postgres:10.1-alpine
     volumes: 
       - ./postgres_data:/var/lib/posgresql/data
-    env_file: .env
+    env_file: PersonalBlogAPI/settings/.env
     ports:
-      - "5432:5432"
+      - "5432"
   web:
     build: .
-    command: python3 /app.manage.py makemigrations
-    command: python3 /app/manage.py migrate
-    command: python3 /app/manage.py runserver 0.0.0.0:8000
+    command: sh -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000 --settings=PersonalBlogAPI.settings.docker"
     volumes:
       - .:/app
     ports:
       - "8000:8000"
-    env_file: .env
+    env_file: PersonalBlogAPI/settings/.env
     depends_on:
       - db

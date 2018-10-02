@@ -26,7 +26,7 @@ class AlbumSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Album
-        fields = ('id', 'author', 'title', 'text', 'slug', 'created_date', 'modified_date', 'photo')
+        fields = ('id', 'author', 'title', 'summary', 'slug', 'created_date', 'modified_date', 'photo')
 
     # Will write data to nested serializer
     def create(self, validated_data):

@@ -79,5 +79,5 @@ class Album(models.Model):
 class Photo(models.Model):
     album = models.ForeignKey(Album, related_name='photo', on_delete=models.CASCADE)
     created_date = models.DateTimeField(default=timezone.now)
-    image = models.ImageField(blank=True)
+    image = models.ImageField(upload_to = 'images')
 
