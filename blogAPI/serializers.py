@@ -18,7 +18,7 @@ class PageSerializer(serializers.ModelSerializer):
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
-        fields = ('id', 'album', 'image', 'created_date')
+        fields = ('id', 'album', 'image', 'created_date', 'description')
 
 class AlbumSerializer(serializers.ModelSerializer):
 
