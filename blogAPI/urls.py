@@ -12,8 +12,7 @@ urlpatterns = {
     path('pages/<slug>', PageDetailsView.as_view(), name="page-details"),
     path('albums', AlbumCreateView.as_view(), name="albums"),
     path('albums/<slug>', AlbumDetailsView.as_view(), name="album-details"),
-    path('photo', PhotoCreateView.as_view(), name="photo"),
-    path('photo/<pk>', PhotoDetailsView.as_view(), name="photo-details"),
+    path('albums/<slug>/<pk>', PhotoDetailsView.as_view(), name="photo-details"),
 }
 
 # Format url based on url patterns

@@ -8,7 +8,7 @@ class TestAlbum(TestCase):
     def setUp(self):
         # Define test variables to be used throughout the tests
         self.client = APIClient()
-        self.albumData = {'author': 'Test Person', 'title': 'New Album', 'text': 'This is a new page', 'photo': []}
+        self.albumData = {'author': 'Test Person', 'title': 'New Album', 'text': 'This is a new album', 'summary': 'this is a summary of the album', 'photo': []}
         self.albumResponse = self.client.post(
             reverse('albums'),
             self.albumData,

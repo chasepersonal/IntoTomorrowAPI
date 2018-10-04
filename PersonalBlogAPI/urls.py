@@ -22,4 +22,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Include URL's for API to make sure app routes to API
     path('api/', include('blogAPI.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

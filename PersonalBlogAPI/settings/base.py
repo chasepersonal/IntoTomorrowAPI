@@ -16,6 +16,8 @@ import environ
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+REPOSITORY_ROOT = os.path.dirname(BASE_DIR)
+
 # Import .env file and case default values
 env = environ.Env(
     DEBUG = (bool, False)
@@ -140,4 +142,4 @@ STATICFILES_DIR = (
 
 # Collect static files to be used in one place
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(REPOSITORY_ROOT, 'staticfiles')

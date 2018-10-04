@@ -14,7 +14,7 @@ DATABASES = {
 }
 
 # Collect media files locally and save them in a media folder
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(REPOSITORY_ROOT, 'media/')
 
 # URL for media collection
 MEDIA_URL = '/media/'
