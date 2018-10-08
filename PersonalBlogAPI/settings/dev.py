@@ -5,6 +5,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_HEADERS = ('content-type')
 
 DATABASES = {
     'default': {
@@ -12,9 +13,3 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-# Collect media files locally and save them in a media folder
-MEDIA_ROOT = os.path.join(REPOSITORY_ROOT, 'media/')
-
-# URL for media collection
-MEDIA_URL = '/media/'

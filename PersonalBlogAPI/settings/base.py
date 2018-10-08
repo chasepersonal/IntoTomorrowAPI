@@ -16,8 +16,6 @@ import environ
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-REPOSITORY_ROOT = os.path.dirname(BASE_DIR)
-
 # Import .env file and case default values
 env = environ.Env(
     DEBUG = (bool, False)
@@ -47,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework', # Needed for REST API functions
     'blogAPI', # Main API app
     'corsheaders', # To allow usage of CORS
+    'storages' # Alllow storage to S3 Bucket
 ]
 
 MIDDLEWARE = [
@@ -128,18 +127,21 @@ USE_L10N = True
 
 USE_TZ = True
 
+# AWS Credentials for S3 Bucket
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.1/howto/static-files/
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = env('AWS_S3_CUSTOM_DOMAIN')
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_S3_REGION_NAME = 'us-east-1'
+AWS_LOCATION = 'static'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'staticfiles')
+]
+STATIC_URL = env('AWS_STATIC_URL')
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-STATIC_URL = '/static/'
-
-# Look for static files not tied to an app
-
-STATICFILES_DIR = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
-# Collect static files to be used in one place
-
-STATIC_ROOT = os.path.join(REPOSITORY_ROOT, 'staticfiles')
+DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'

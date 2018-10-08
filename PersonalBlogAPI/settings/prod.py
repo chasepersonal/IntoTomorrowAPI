@@ -14,6 +14,8 @@ CORS_ORIGIN_WHITELIST = (
     'https://into-tomorrow.herokuapp.com/'
 )
 
+CORS_ALLOW_HEADERS = ('content-type')
+
 # Activate django_herkou to allow connection to Heroku and establish Postgres Database
 
 django_heroku.settings(locals())
