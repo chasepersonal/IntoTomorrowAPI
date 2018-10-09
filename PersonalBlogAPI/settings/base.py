@@ -139,9 +139,11 @@ AWS_S3_OBJECT_PARAMETERS = {
 AWS_S3_REGION_NAME = 'us-east-1'
 AWS_LOCATION = 'static'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'staticfiles')
+    os.path.join(BASE_DIR, 'assets')
 ]
 STATIC_URL = env('AWS_STATIC_URL')
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_collected')
